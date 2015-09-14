@@ -3,7 +3,10 @@ import net.demus_intergalactical.serverman.OutputHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import net.demus_intergalactical.serverman.instance.ServerInstanceProcess;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class ServerMan {
 
@@ -16,6 +19,8 @@ public class ServerMan {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+
 
 		ServerInstance i = new ServerInstance("vanilla_1.8");
 		i.loadInstance();
@@ -42,7 +47,7 @@ public class ServerMan {
 
 			@Override
 			public void onOutputErr(String time, String text) {
-				System.out.println("err: " + text);
+				System.out.println("error: " + text);
 			}
 
 			@Override
@@ -66,55 +71,6 @@ public class ServerMan {
 			Thread.sleep(1);
 			running = p.isRunning();
 		}
-	}
-
-	public static void example() throws IOException, InterruptedException {
-
-		ProcessBuilder pb = new ProcessBuilder();
-
-		File ed = new File("server");
-		pb.directory(ed);
-		pb.command("java", "-jar",
-			"forge-1.7.10-10.13.2.1291-universal.jar", "nogui");
-		pb.redirectErrorStream(false);
-
-
-
-		Process p = pb.start();
-		OutputStream outS = p.getOutputStream();
-		InputStream  inS  = p.getInputStream();
-
-		InputStreamReader  inB  = new InputStreamReader(inS);
-		OutputStreamWriter outB = new OutputStreamWriter(outS);
-
-		BufferedReader in  = new BufferedReader(inB);
-		BufferedWriter out = new BufferedWriter(outB);
-
-
-		BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-
-		String line;
-
-		while (p.isAlive()) {
-			if (stdin.ready()) {
-				line = stdin.readLine();
-				out.write(line);
-				out.newLine();
-				out.flush();
-			}
-			if (in.ready()) {
-				System.out.print("out: ");
-				System.out.println(in.readLine());
-				System.out.flush();
-			}
-		}
-
-		in.close();
-		out.close();
-		inB.close();
-		outB.close();
-
-		p.waitFor();
 	}
 
 }

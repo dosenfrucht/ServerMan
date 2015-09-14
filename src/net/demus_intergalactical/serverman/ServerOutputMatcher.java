@@ -37,6 +37,15 @@ public class ServerOutputMatcher {
 			String infoS   = f.readLine();
 			String elseS   = f.readLine();
 
+			/*
+			System.out.println(joinedS);
+			System.out.println(leftS);
+			System.out.println(errS);
+			System.out.println(warnS);
+			System.out.println(infoS);
+			System.out.println(elseS);
+			*/
+
 			joinedPattern = Pattern.compile(joinedS);
 			leftPattern = Pattern.compile(leftS);
 			errPattern = Pattern.compile(errS);
@@ -88,7 +97,7 @@ public class ServerOutputMatcher {
 		} else {
 			outputHandler.onOutputErr(
 				null,
-				"Could not parse server output"
+				"Could not parse server output: " + line
 			);
 		}
 	}

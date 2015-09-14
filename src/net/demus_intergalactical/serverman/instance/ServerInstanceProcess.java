@@ -29,4 +29,8 @@ public class ServerInstanceProcess {
 	public synchronized boolean isRunning() {
 		return rT.isAlive();
 	}
+
+	public synchronized void stop() {
+		runner.stop();
+	}
 }

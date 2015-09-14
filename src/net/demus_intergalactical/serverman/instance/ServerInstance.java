@@ -100,6 +100,14 @@ public class ServerInstance {
 		return p.isRunning();
 	}
 
+	public synchronized void send(String command) {
+		p.send(command);
+	}
+
+	public synchronized void stop() {
+		p.stop();
+	}
+
 	public synchronized ServerInstanceProcess getProcess() {
 		return p;
 	}
