@@ -1,0 +1,6 @@
+\[([0-9\:]+)\] \[Server thread\/INFO\]\: ([a-zA-Z0-9_]+) joined the game
+\[([0-9\:]+)\] \[Server thread\/INFO\]\: ([a-zA-Z0-9_]+) left the game
+\[([0-9\:]+)\] \[Server thread\/ERR\]\: (.*)
+\[([0-9\:]+)\] \[Server thread\/WARN\]\: (.*)
+\[([0-9\:]+)\] \[Server thread\/INFO\]\: (.*)
+\[([0-9\:]+)\] (.*)

@@ -1,0 +1,118 @@
+package net.demus_intergalactical.serverman.instance;
+
+import net.demus_intergalactical.serverman.Globals;
+import net.demus_intergalactical.serverman.OutputHandler;
+import net.demus_intergalactical.serverman.ServerOutputMatcher;
+
+import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+public class ServerInstanceRunner implements Runnable {
+
+	private volatile Queue<String> commandBuffer;
+	private volatile boolean running = false;
+
+	private volatile ServerInstance instance;
+	private volatile OutputHandler outputHandler;
+
+	public ServerInstanceRunner(ServerInstance inst, OutputHandler out) {
+		this.instance = inst;
+		this.outputHandler = out;
+		commandBuffer = new ConcurrentLinkedQueue<>();
+	}
+
+	@Override
+	public void run() {
+		running = true;
+
+		String instHome = "";
+
+		ProcessBuilder pb = new ProcessBuilder();
+		instHome = Globals.getServerManConfig()
+			.get("instances_home") + File.separator
+			+ instance.getServerInstanceID();
+		pb.directory(
+			new File(instHome)
+		);
+
+		List<String> com = new LinkedList<>();
+		String jvmLocation;
+		if (System.getProperty("os.name").startsWith("Win")) {
+			jvmLocation = System.getProperties()
+				.getProperty("java.home") + File.separator
+				+ "bin" + File.separator + "java.exe";
+		} else {
+			jvmLocation = System.getProperties()
+				.getProperty("java.home") + File.separator
+				+ "bin" + File.separator + "java";
+		}
+		com.add(jvmLocation);
+		com.addAll(instance.getJavaArgs());
+		com.add("-jar");
+		com.add(instance.getServerFile());
+		com.add("nogui");
+		pb.command(com);
+
+
+		pb.redirectErrorStream(false);
+		Process p = null;
+		try {
+			p = pb.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+			running = false;
+			return;
+		}
+
+		OutputStream outS = p.getOutputStream();
+		InputStream inS  = p.getInputStream();
+
+		InputStreamReader inB  = new InputStreamReader(inS);
+		OutputStreamWriter outB = new OutputStreamWriter(outS);
+
+		BufferedReader in  = new BufferedReader(inB);
+		BufferedWriter out = new BufferedWriter(outB);
+
+		ServerOutputMatcher matcher = new ServerOutputMatcher(
+			instance.getServerInstanceID(),
+			outputHandler
+		);
+
+		try {
+			while (running) {
+				if (!commandBuffer.isEmpty()) {
+					out.write(commandBuffer.poll());
+					out.newLine();
+					out.flush();
+				}
+				if (in.ready()) {
+					String line = in.readLine();
+					matcher.process(line);
+				}
+				if (!p.isAlive()) {
+					running = false;
+				}
+			}
+
+			in.close();
+			out.close();
+			inB.close();
+			outB.close();
+
+			p.destroy();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public synchronized void send(String command) {
+		commandBuffer.offer(command);
+	}
+
+	public synchronized void stop() {
+		running = false;
+	}
+}

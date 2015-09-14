@@ -1,7 +1,9 @@
 package net.demus_intergalactical.serverman.instance;
 
 import net.demus_intergalactical.serverman.Globals;
+import net.demus_intergalactical.serverman.OutputHandler;
 import net.demus_intergalactical.serverman.Utils;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -14,6 +16,8 @@ public class ServerInstanceSettings {
 
 	private HashMap<String, Object> conf;
 	private String path;
+
+	private OutputHandler outputHandler;
 
 	public ServerInstanceSettings() {
 		path = Globals.getServerManConfig()
@@ -40,9 +44,9 @@ public class ServerInstanceSettings {
 		final JSONObject finalConfJson = confJson;
 		confJson.keySet().stream()
 			.filter(key -> key instanceof String)
-			.forEach(key -> {
-				conf.put((String)key, finalConfJson.get(key));
-			});
+			.forEach(key ->
+				conf.put((String)key, finalConfJson.get(key))
+			);
 		return this;
 	}
 
@@ -67,4 +71,24 @@ public class ServerInstanceSettings {
 		return conf.get(key);
 	}
 
+	public ServerInstanceSettings add(
+		String serverInstanceID,
+		JSONObject data) {
+		conf.put(serverInstanceID, data);
+		return this;
+	}
+
+	public ServerInstanceSettings addDefault(String serverInstanceID) {
+		this.add(serverInstanceID, defaultInstance(serverInstanceID));
+		saveConfig(path);
+		return this;
+	}
+
+	private JSONObject defaultInstance(String id) {
+		JSONObject obj = new JSONObject();
+		obj.put("name", id);
+		obj.put("server_file", "minecraft_server.x.x.x.jar");
+		obj.put("java_args", new JSONArray());
+		return obj;
+	}
 }
