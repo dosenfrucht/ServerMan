@@ -42,7 +42,10 @@ public class ServerInstance {
 
 		File dir = new File(instanceHome);
 		if (!dir.exists()) {
-			dir.mkdirs();
+			if (!dir.mkdirs()) {
+				System.err.println("Could not create"
+					+ "instance folder");
+			}
 		}
 
 		JSONObject obj = (JSONObject)
@@ -75,7 +78,10 @@ public class ServerInstance {
 			// TODO download suitable version
 			System.err.println("match.js not found");
 			try {
-				matchScriptFile.createNewFile();
+				if (!matchScriptFile.createNewFile()) {
+					System.err.println("Could not create"
+						+ "match.js");
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

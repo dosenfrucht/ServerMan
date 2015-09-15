@@ -6,17 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02fb60e2-ea51-4b6a-a5d3-e0c3dea42c87" name="Default" comment="Pattern matching">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/instances/vanilla_1.8/match.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/instances/vanilla_1.8/_patterns.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/ServerOutputMatcher.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/OutputHandler.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/OutputHandler.java" />
+    <list default="true" id="02fb60e2-ea51-4b6a-a5d3-e0c3dea42c87" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstance.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceProcess.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceProcess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceRunner.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerMan.java" afterPath="$PROJECT_DIR$/src/ServerMan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/instances/instances.json" afterPath="$PROJECT_DIR$/data/instances/instances.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ServerMan.iws" />
@@ -74,14 +65,14 @@
       <file leaf-file-name="ServerInstance.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6319218">
-              <caret line="87" column="46" selection-start-line="87" selection-start-column="46" selection-end-line="87" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.33876222">
+              <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3383#3384#0" expanded="true" />
-                <element signature="e#3398#3399#0" expanded="true" />
-                <element signature="e#3511#3512#0" expanded="true" />
-                <element signature="e#3527#3528#0" expanded="true" />
+                <element signature="e#3541#3542#0" expanded="true" />
+                <element signature="e#3556#3557#0" expanded="true" />
+                <element signature="e#3669#3670#0" expanded="true" />
+                <element signature="e#3685#3686#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -523,7 +514,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442262661081</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Pattern matching via JavaScript Addons">
+      <created>1442347153621</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1442347153621</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -569,7 +566,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Execution in a different thread implemented" />
     <MESSAGE value="More delegation" />
-    <option name="LAST_COMMIT_MESSAGE" value="More delegation" />
+    <MESSAGE value="Pattern matching via JavaScript Addons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pattern matching via JavaScript Addons" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -596,10 +594,10 @@
           <caret line="107" column="25" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3383#3384#0" expanded="true" />
-            <element signature="e#3398#3399#0" expanded="true" />
-            <element signature="e#3511#3512#0" expanded="true" />
-            <element signature="e#3527#3528#0" expanded="true" />
+            <element signature="e#3541#3542#0" expanded="true" />
+            <element signature="e#3556#3557#0" expanded="true" />
+            <element signature="e#3669#3670#0" expanded="true" />
+            <element signature="e#3685#3686#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -681,10 +679,10 @@
           <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3383#3384#0" expanded="true" />
-            <element signature="e#3398#3399#0" expanded="true" />
-            <element signature="e#3511#3512#0" expanded="true" />
-            <element signature="e#3527#3528#0" expanded="true" />
+            <element signature="e#3541#3542#0" expanded="true" />
+            <element signature="e#3556#3557#0" expanded="true" />
+            <element signature="e#3669#3670#0" expanded="true" />
+            <element signature="e#3685#3686#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -745,10 +743,10 @@
           <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3383#3384#0" expanded="true" />
-            <element signature="e#3398#3399#0" expanded="true" />
-            <element signature="e#3511#3512#0" expanded="true" />
-            <element signature="e#3527#3528#0" expanded="true" />
+            <element signature="e#3541#3542#0" expanded="true" />
+            <element signature="e#3556#3557#0" expanded="true" />
+            <element signature="e#3669#3670#0" expanded="true" />
+            <element signature="e#3685#3686#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -888,16 +886,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/io/File.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537">
+          <caret line="432" column="23" selection-start-line="432" selection-start-column="23" selection-end-line="432" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6319218">
-          <caret line="87" column="46" selection-start-line="87" selection-start-column="46" selection-end-line="87" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.33876222">
+          <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3383#3384#0" expanded="true" />
-            <element signature="e#3398#3399#0" expanded="true" />
-            <element signature="e#3511#3512#0" expanded="true" />
-            <element signature="e#3527#3528#0" expanded="true" />
+            <element signature="e#3541#3542#0" expanded="true" />
+            <element signature="e#3556#3557#0" expanded="true" />
+            <element signature="e#3669#3670#0" expanded="true" />
+            <element signature="e#3685#3686#0" expanded="true" />
           </folding>
         </state>
       </provider>
