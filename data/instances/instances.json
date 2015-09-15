@@ -2,6 +2,6 @@
 	"vanilla_1.8": {
 		"name": "Vanilla 1.8",
 		"server_file": "minecraft_server.1.8.8.jar",
-		"java_args": ["-Xmx4G", "-Xms1G"]
+		"java_args": []
 	}
 }

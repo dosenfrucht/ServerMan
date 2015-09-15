@@ -1,12 +1,10 @@
 import net.demus_intergalactical.serverman.Globals;
-import net.demus_intergalactical.serverman.OutputHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import net.demus_intergalactical.serverman.instance.ServerInstanceProcess;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class ServerMan {
 
@@ -22,39 +20,19 @@ public class ServerMan {
 
 
 
-		ServerInstance i = new ServerInstance("vanilla_1.8");
+		ServerInstance i = new ServerInstance("vanilla_1.8",
+			(type, time, th, args1) -> {
+				System.out.print(th);
+				System.out.print(": ");
+				for (String arg : args1) {
+					System.out.print(arg);
+					System.out.print(' ');
+				}
+				System.out.println();
+			}
+		);
 		i.loadInstance();
-		i.run(new OutputHandler() {
-			@Override
-			public void onOutputPlayerJoined(String time, String player) {
-				System.out.println(player + " joined");
-			}
-
-			@Override
-			public void onOutputPlayerLeft(String time, String player) {
-				System.out.println(player + " left");
-			}
-
-			@Override
-			public void onOutputInfo(String time, String text) {
-				System.out.println("info: " + text);
-			}
-
-			@Override
-			public void onOutputWarn(String time, String text) {
-				System.out.println("warn: " + text);
-			}
-
-			@Override
-			public void onOutputErr(String time, String text) {
-				System.out.println("error: " + text);
-			}
-
-			@Override
-			public void onOutput(String time, String text) {
-				System.out.println(text);
-			}
-		});
+		i.run();
 
 
 		BufferedReader in = new BufferedReader(

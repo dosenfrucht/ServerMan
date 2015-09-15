@@ -5,11 +5,6 @@ package net.demus_intergalactical.serverman;
 
 public interface OutputHandler {
 
-	void onOutputPlayerJoined(String time, String player);
-	void onOutputPlayerLeft(String time, String player);
-	void onOutputInfo(String time, String text);
-	void onOutputWarn(String time, String text);
-	void onOutputErr(String time, String text);
-	void onOutput(String time, String text);
+	void receive(String type, String time, String thread, String[] args);
 
 }

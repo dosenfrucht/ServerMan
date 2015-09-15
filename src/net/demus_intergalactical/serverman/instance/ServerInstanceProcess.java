@@ -1,20 +1,13 @@
 package net.demus_intergalactical.serverman.instance;
 
-import net.demus_intergalactical.serverman.OutputHandler;
-
 public class ServerInstanceProcess {
-
-	private volatile ServerInstance instance;
-	private volatile OutputHandler outputHandler;
 
 	private volatile Thread rT;
 
 	private volatile ServerInstanceRunner runner;
 
-	public ServerInstanceProcess(ServerInstance inst, OutputHandler out) {
-		this.instance = inst;
-		this.outputHandler = out;
-		runner = new ServerInstanceRunner(inst, out);
+	public ServerInstanceProcess(ServerInstance inst) {
+		runner = new ServerInstanceRunner(inst);
 	}
 
 	public void start() {

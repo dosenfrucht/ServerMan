@@ -6,7 +6,14 @@ import net.demus_intergalactical.serverman.OutputHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,9 +26,13 @@ public class ServerInstance {
 	private List<String> javaArgs;
 
 	private ServerInstanceProcess p;
+	private ScriptEngine js;
 
-	public ServerInstance(String serverInstanceID) {
+	private OutputHandler out;
+
+	public ServerInstance(String serverInstanceID, OutputHandler out) {
 		this.serverInstanceID = serverInstanceID;
+		this.out = out;
 	}
 
 	public ServerInstance loadInstance() {
@@ -53,7 +64,39 @@ public class ServerInstance {
 		for (Object arg : tmpArgs) {
 			javaArgs.add((String) arg);
 		}
-		System.out.println(javaArgs);
+
+		// loadMatchScript
+		String matchScriptPath = Globals.getServerManConfig()
+			.get("instances_home") + File.separator
+			+ serverInstanceID + File.separator + "match.js";
+
+		File matchScriptFile = new File(matchScriptPath);
+		if (!matchScriptFile.exists()) {
+			// TODO download suitable version
+			System.err.println("match.js not found");
+			try {
+				matchScriptFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		ScriptEngineManager sm = new ScriptEngineManager();
+		this.js = sm.getEngineByName("JavaScript");
+
+		try {
+			js.put("writer", out);
+			js.eval(new FileReader(matchScriptFile));
+		} catch (ScriptException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			((Invocable) js).invokeFunction("init");
+		} catch (ScriptException | NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+
 		return this;
 	}
 
@@ -91,8 +134,8 @@ public class ServerInstance {
 		this.javaArgs = javaArgs;
 	}
 
-	public void run(OutputHandler out) {
-		p = new ServerInstanceProcess(this, out);
+	public void run() {
+		p = new ServerInstanceProcess(this);
 		p.start();
 	}
 
@@ -110,5 +153,9 @@ public class ServerInstance {
 
 	public synchronized ServerInstanceProcess getProcess() {
 		return p;
+	}
+
+	public ScriptEngine getMatcherJS() {
+		return js;
 	}
 }

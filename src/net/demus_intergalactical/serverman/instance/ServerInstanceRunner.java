@@ -1,9 +1,8 @@
 package net.demus_intergalactical.serverman.instance;
 
 import net.demus_intergalactical.serverman.Globals;
-import net.demus_intergalactical.serverman.OutputHandler;
-import net.demus_intergalactical.serverman.ServerOutputMatcher;
 
+import javax.script.Invocable;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,11 +15,9 @@ public class ServerInstanceRunner implements Runnable {
 	private volatile boolean running = false;
 
 	private volatile ServerInstance instance;
-	private volatile OutputHandler outputHandler;
 
-	public ServerInstanceRunner(ServerInstance inst, OutputHandler out) {
+	public ServerInstanceRunner(ServerInstance inst) {
 		this.instance = inst;
-		this.outputHandler = out;
 		commandBuffer = new ConcurrentLinkedQueue<>();
 	}
 
@@ -28,7 +25,7 @@ public class ServerInstanceRunner implements Runnable {
 	public void run() {
 		running = true;
 
-		String instHome = "";
+		String instHome;
 
 		ProcessBuilder pb = new ProcessBuilder();
 		instHome = Globals.getServerManConfig()
@@ -58,7 +55,7 @@ public class ServerInstanceRunner implements Runnable {
 
 
 		pb.redirectErrorStream(false);
-		Process p = null;
+		Process p;
 		try {
 			p = pb.start();
 		} catch (Exception e) {
@@ -76,11 +73,6 @@ public class ServerInstanceRunner implements Runnable {
 		BufferedReader in  = new BufferedReader(inB);
 		BufferedWriter out = new BufferedWriter(outB);
 
-		ServerOutputMatcher matcher = new ServerOutputMatcher(
-			instance.getServerInstanceID(),
-			outputHandler
-		);
-
 		try {
 			while (running) {
 				if (!commandBuffer.isEmpty()) {
@@ -90,7 +82,12 @@ public class ServerInstanceRunner implements Runnable {
 				}
 				if (in.ready()) {
 					String line = in.readLine();
-					matcher.process(line);
+
+					((Invocable) instance.getMatcherJS())
+						.invokeFunction(
+							"match",
+							line
+						);
 				}
 				if (!p.isAlive()) {
 					running = false;
