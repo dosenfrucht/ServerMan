@@ -3,8 +3,16 @@ package net.demus_intergalactical.serverman;
 // [15:46:21] [Server thread/INFO]: Dosenfrucht joined the game
 // [16:13:08] [Server thread/INFO]: Dosenfrucht left the game
 
+import java.util.Date;
+
 public interface OutputHandler {
 
-	void receive(String type, String time, String thread, String[] args);
+	void receive(
+		String type,
+		Date time,
+		String thread,
+		String infoLvl,
+		String[] args
+	);
 
 }
