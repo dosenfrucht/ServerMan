@@ -9,7 +9,7 @@ public interface OutputHandler {
 
 	void receive(
 		String type,
-		Date time,
+		Object time,
 		String thread,
 		String infoLvl,
 		String[] args

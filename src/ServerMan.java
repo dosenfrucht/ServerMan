@@ -22,7 +22,7 @@ public class ServerMan {
 
 		ServerInstance i = new ServerInstance("vanilla_1.8",
 			(type, time, th, infoLvl, args1) -> {
-				System.out.print(time);
+				System.out.print(time.getClass().toString());
 				System.out.print(' ');
 				System.out.print(th);
 				System.out.print('/');
@@ -35,6 +35,7 @@ public class ServerMan {
 				System.out.println();
 			}
 		);
+
 		i.loadInstance();
 		i.run();
 
