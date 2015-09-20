@@ -1,4 +1,5 @@
 import net.demus_intergalactical.serverman.Globals;
+import net.demus_intergalactical.serverman.PlayerHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import net.demus_intergalactical.serverman.instance.ServerInstanceProcess;
 
@@ -21,20 +22,33 @@ public class ServerMan {
 
 
 		ServerInstance i = new ServerInstance("vanilla_1.8",
-			(type, time, th, infoLvl, args1) -> {
+			(type, time, th, infoLvl, arg) -> {
 				System.out.print(time.getClass().toString());
 				System.out.print(' ');
 				System.out.print(th);
 				System.out.print('/');
 				System.out.print(infoLvl);
 				System.out.print(": ");
-				for (String arg : args1) {
-					System.out.print(arg);
-					System.out.print(' ');
-				}
+				System.out.print(arg.toString());
 				System.out.println();
-			}
+			}, null
 		);
+		i.setPlayerHandler(new PlayerHandler() {
+			@Override
+			public void onPlayerJoined(String name) {
+				System.out.println("Player " + name
+					+ " joined");
+				System.out.println(i.getProcess().getPlayers()
+					.size());
+			}
+
+			@Override
+			public void onPlayerLeft(String name) {
+				System.out.println("Player " + name + " left");
+				System.out.println(i.getProcess().getPlayers()
+					.size());
+			}
+		});
 
 		i.loadInstance();
 		i.run();

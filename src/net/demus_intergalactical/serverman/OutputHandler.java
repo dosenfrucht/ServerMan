@@ -7,12 +7,12 @@ import java.util.Date;
 
 public interface OutputHandler {
 
-	void receive(
+	void send(
 		String type,
 		Object time,
 		String thread,
 		String infoLvl,
-		String[] args
+		Object arg
 	);
 
 }

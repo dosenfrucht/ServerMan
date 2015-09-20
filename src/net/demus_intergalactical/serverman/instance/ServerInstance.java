@@ -3,6 +3,7 @@ package net.demus_intergalactical.serverman.instance;
 import net.demus_intergalactical.serverman.Globals;
 
 import net.demus_intergalactical.serverman.OutputHandler;
+import net.demus_intergalactical.serverman.PlayerHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -29,13 +30,20 @@ public class ServerInstance {
 	private ScriptEngine js;
 
 	private OutputHandler out;
+	private PlayerHandler playerHandler;
+	private PlayerWrapper playerWrapper;
 
-	public ServerInstance(String serverInstanceID, OutputHandler out) {
+	public ServerInstance(String serverInstanceID, OutputHandler out,
+	                      PlayerHandler playerHandler) {
 		this.serverInstanceID = serverInstanceID;
 		this.out = out;
+		this.playerHandler = playerHandler;
 	}
 
 	public ServerInstance loadInstance() {
+
+		this.playerWrapper = new PlayerWrapper(this, playerHandler);
+
 		String instanceHome = Globals.getServerManConfig()
 			.get("instances_home") + File.separator
 				+ serverInstanceID;
@@ -91,7 +99,8 @@ public class ServerInstance {
 		this.js = sm.getEngineByName("JavaScript");
 
 		try {
-			js.put("writer", out);
+			js.put("log", out);
+			js.put("players", playerWrapper);
 			js.eval(new FileReader(matchScriptFile));
 		} catch (ScriptException | FileNotFoundException e) {
 			e.printStackTrace();
@@ -139,6 +148,24 @@ public class ServerInstance {
 	public void setJavaArgs(List<String> javaArgs) {
 		this.javaArgs = javaArgs;
 	}
+
+
+	public PlayerHandler getPlayerHandler() {
+		return playerHandler;
+	}
+
+	public void setPlayerHandler(PlayerHandler playerHandler) {
+		this.playerHandler = playerHandler;
+	}
+
+	public OutputHandler getOut() {
+		return out;
+	}
+
+	public void setOut(OutputHandler out) {
+		this.out = out;
+	}
+
 
 	public void run() {
 		p = new ServerInstanceProcess(this);
