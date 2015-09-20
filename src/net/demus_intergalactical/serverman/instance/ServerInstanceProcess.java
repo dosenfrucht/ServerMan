@@ -2,7 +2,6 @@ package net.demus_intergalactical.serverman.instance;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class ServerInstanceProcess {
 

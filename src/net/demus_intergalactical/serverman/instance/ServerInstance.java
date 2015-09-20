@@ -31,7 +31,6 @@ public class ServerInstance {
 
 	private OutputHandler out;
 	private PlayerHandler playerHandler;
-	private PlayerWrapper playerWrapper;
 
 	public ServerInstance(String serverInstanceID, OutputHandler out,
 	                      PlayerHandler playerHandler) {
@@ -42,7 +41,7 @@ public class ServerInstance {
 
 	public ServerInstance loadInstance() {
 
-		this.playerWrapper = new PlayerWrapper(this, playerHandler);
+		PlayerWrapper pw = new PlayerWrapper(this, playerHandler);
 
 		String instanceHome = Globals.getServerManConfig()
 			.get("instances_home") + File.separator
@@ -100,7 +99,7 @@ public class ServerInstance {
 
 		try {
 			js.put("log", out);
-			js.put("players", playerWrapper);
+			js.put("players", pw);
 			js.eval(new FileReader(matchScriptFile));
 		} catch (ScriptException | FileNotFoundException e) {
 			e.printStackTrace();
