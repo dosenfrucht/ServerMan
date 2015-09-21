@@ -88,6 +88,7 @@ public class ServerInstanceSettings {
 		JSONObject obj = new JSONObject();
 		obj.put("name", id);
 		obj.put("server_file", "minecraft_server.x.x.x.jar");
+		obj.put("server_version", "unknown");
 		obj.put("java_args", new JSONArray());
 		return obj;
 	}

@@ -4,6 +4,7 @@ import net.demus_intergalactical.serverman.Globals;
 
 import net.demus_intergalactical.serverman.OutputHandler;
 import net.demus_intergalactical.serverman.PlayerHandler;
+import net.demus_intergalactical.serverman.Utils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -24,6 +25,7 @@ public class ServerInstance {
 
 	private String name;
 	private String serverFile;
+	private String serverVersion;
 	private List<String> javaArgs;
 
 	private ServerInstanceProcess p;
@@ -41,8 +43,15 @@ public class ServerInstance {
 
 	public ServerInstance loadInstance() {
 
-		PlayerWrapper pw = new PlayerWrapper(this, playerHandler);
+		loadConfig();
 
+		loadMatchScript();
+
+		return this;
+	}
+
+
+	private void loadConfig() {
 		String instanceHome = Globals.getServerManConfig()
 			.get("instances_home") + File.separator
 				+ serverInstanceID;
@@ -69,29 +78,29 @@ public class ServerInstance {
 
 		name = (String) obj.get("name");
 		serverFile = (String) obj.get("server_file");
+		serverVersion = (String) obj.get("server_version");
 		tmpArgs = ((JSONArray) obj.get("java_args")).toArray();
 		javaArgs = new LinkedList<>();
 		for (Object arg : tmpArgs) {
 			javaArgs.add((String) arg);
 		}
+	}
 
-		// loadMatchScript
+
+
+	private void loadMatchScript() {
+		PlayerWrapper pw = new PlayerWrapper(this, playerHandler);
+
 		String matchScriptPath = Globals.getServerManConfig()
 			.get("instances_home") + File.separator
 			+ serverInstanceID + File.separator + "match.js";
 
 		File matchScriptFile = new File(matchScriptPath);
 		if (!matchScriptFile.exists()) {
-			// TODO download suitable version
-			System.err.println("match.js not found");
-			try {
-				if (!matchScriptFile.createNewFile()) {
-					System.err.println("Could not create"
-						+ "match.js");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			System.err.println("match.js not found .. attempt to download");
+			File tmp = new File(matchScriptPath);
+			String url = "http://serverman.demus-intergalactical.net/v/" + serverVersion + "/match.js";
+			Utils.download(url, tmp);
 		}
 
 		ScriptEngineManager sm = new ScriptEngineManager();
@@ -110,8 +119,6 @@ public class ServerInstance {
 		} catch (ScriptException | NoSuchMethodException e) {
 			e.printStackTrace();
 		}
-
-		return this;
 	}
 
 
@@ -189,5 +196,13 @@ public class ServerInstance {
 
 	public ScriptEngine getMatcherJS() {
 		return js;
+	}
+
+	public String getServerVersion() {
+		return serverVersion;
+	}
+
+	public void setServerVersion(String serverVersion) {
+		this.serverVersion = serverVersion;
 	}
 }

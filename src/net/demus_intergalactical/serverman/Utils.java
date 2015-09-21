@@ -1,11 +1,14 @@
 package net.demus_intergalactical.serverman;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 
 public class Utils {
 
@@ -27,6 +30,15 @@ public class Utils {
 		JSONParser jp = new JSONParser();
 
 		return (JSONObject) jp.parse(new FileReader(filename));
+	}
+
+	public static void download(String url, File f) {
+		try {
+			FileUtils.copyURLToFile(new URL(url), f, 10, 10);
+		} catch (IOException e) {
+			System.err.println("Could not download " + url);
+			e.printStackTrace();
+		}
 	}
 
 }
