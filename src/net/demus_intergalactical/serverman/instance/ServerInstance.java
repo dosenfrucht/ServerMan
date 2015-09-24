@@ -55,11 +55,14 @@ public class ServerInstance {
 
 	public ServerInstance save() {
 
+		JSONArray a = new JSONArray();
+		a.addAll(javaArgs);
+
 		JSONObject obj = new JSONObject();
 		obj.put("name", name);
 		obj.put("server_file", serverFile);
 		obj.put("server_version", serverVersion);
-		obj.put("java_args", javaArgs);
+		obj.put("java_args", a);
 		Globals.getInstanceSettings().add(serverInstanceID, obj);
 		Globals.getInstanceSettings().saveConfig();
 

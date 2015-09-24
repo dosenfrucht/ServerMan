@@ -51,6 +51,8 @@ public class ServerMan {
 		});
 
 		i.load();
+		i.save();
+		i.load();
 		i.run();
 
 
