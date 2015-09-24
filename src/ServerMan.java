@@ -50,7 +50,7 @@ public class ServerMan {
 			}
 		});
 
-		i.loadInstance();
+		i.load();
 		i.run();
 
 

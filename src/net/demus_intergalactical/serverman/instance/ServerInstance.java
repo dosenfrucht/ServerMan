@@ -1,7 +1,6 @@
 package net.demus_intergalactical.serverman.instance;
 
 import net.demus_intergalactical.serverman.Globals;
-
 import net.demus_intergalactical.serverman.OutputHandler;
 import net.demus_intergalactical.serverman.PlayerHandler;
 import net.demus_intergalactical.serverman.Utils;
@@ -15,7 +14,6 @@ import javax.script.ScriptException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,14 +32,19 @@ public class ServerInstance {
 	private OutputHandler out;
 	private PlayerHandler playerHandler;
 
-	public ServerInstance(String serverInstanceID, OutputHandler out,
-	                      PlayerHandler playerHandler) {
-		this.serverInstanceID = serverInstanceID;
-		this.out = out;
-		this.playerHandler = playerHandler;
+	public ServerInstance() {
+		javaArgs = new LinkedList<>();
 	}
 
-	public ServerInstance loadInstance() {
+	public ServerInstance(String serverInstanceID, OutputHandler out,
+	                      PlayerHandler playerHandler) {
+		javaArgs = new LinkedList<>();
+		setServerInstanceID(serverInstanceID);
+		setOut(out);
+		setPlayerHandler(playerHandler);
+	}
+
+	public ServerInstance load() {
 
 		loadConfig();
 
@@ -50,8 +53,21 @@ public class ServerInstance {
 		return this;
 	}
 
+	public ServerInstance save() {
 
-	private void loadConfig() {
+		JSONObject obj = new JSONObject();
+		obj.put("name", name);
+		obj.put("server_file", serverFile);
+		obj.put("server_version", serverVersion);
+		obj.put("java_args", javaArgs);
+		Globals.getInstanceSettings().add(serverInstanceID, obj);
+		Globals.getInstanceSettings().saveConfig();
+
+		return this;
+	}
+
+
+	public void loadConfig() {
 		String instanceHome = Globals.getServerManConfig()
 			.get("instances_home") + File.separator
 				+ serverInstanceID;
@@ -80,7 +96,6 @@ public class ServerInstance {
 		serverFile = (String) obj.get("server_file");
 		serverVersion = (String) obj.get("server_version");
 		tmpArgs = ((JSONArray) obj.get("java_args")).toArray();
-		javaArgs = new LinkedList<>();
 		for (Object arg : tmpArgs) {
 			javaArgs.add((String) arg);
 		}
@@ -88,7 +103,7 @@ public class ServerInstance {
 
 
 
-	private void loadMatchScript() {
+	public void loadMatchScript() {
 		PlayerWrapper pw = new PlayerWrapper(this, playerHandler);
 
 		String matchScriptPath = Globals.getServerManConfig()

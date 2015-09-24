@@ -32,7 +32,7 @@ public class ServerInstanceSettings {
 			f.getParentFile().mkdirs();
 			f.createNewFile();
 			conf = defaultConfig();
-			saveConfig(path);
+			saveConfig();
 			return this;
 		}
 		JSONObject confJson = null;
@@ -50,7 +50,7 @@ public class ServerInstanceSettings {
 		return this;
 	}
 
-	public ServerInstanceSettings saveConfig(String path) {
+	public ServerInstanceSettings saveConfig() {
 		JSONObject obj = new JSONObject();
 		obj.putAll(conf);
 		try {
@@ -80,7 +80,7 @@ public class ServerInstanceSettings {
 
 	public ServerInstanceSettings addDefault(String serverInstanceID) {
 		this.add(serverInstanceID, defaultInstance(serverInstanceID));
-		saveConfig(path);
+		saveConfig();
 		return this;
 	}
 
