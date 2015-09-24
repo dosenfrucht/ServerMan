@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ServerInstanceSettings {
 
@@ -91,5 +93,27 @@ public class ServerInstanceSettings {
 		obj.put("server_version", "unknown");
 		obj.put("java_args", new JSONArray());
 		return obj;
+	}
+
+	public List<ServerInstance> getAllInstances() {
+		List<ServerInstance> l = new LinkedList<>();
+		ServerInstance i;
+		JSONObject o;
+		List<String> args;
+		for (Object ko : conf.keySet()) {
+			o = (JSONObject) conf.get(ko);
+			i = new ServerInstance();
+			i.setServerInstanceID((String) ko);
+			i.setName((String) o.get("name"));
+			i.setServerFile((String) o.get("server_file"));
+			i.setServerVersion((String) o.get("server_version"));
+			args = new LinkedList<>();
+			for (Object e : ((JSONArray) o.get("java_args")).toArray()) {
+				args.add((String) e);
+			}
+			i.setJavaArgs(args);
+			l.add(i);
+		}
+		return l;
 	}
 }

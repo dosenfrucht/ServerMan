@@ -6,6 +6,7 @@ import net.demus_intergalactical.serverman.instance.ServerInstanceProcess;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class ServerMan {
 
@@ -15,6 +16,8 @@ public class ServerMan {
 		try {
 			Globals.getServerManConfig().load();
 			Globals.getInstanceSettings().load();
+			List<ServerInstance> i = Globals.getInstanceSettings().getAllInstances();
+			System.out.println(i);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
