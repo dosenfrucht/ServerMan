@@ -34,7 +34,7 @@ public class Utils {
 
 	public static void download(String url, File f) {
 		try {
-			FileUtils.copyURLToFile(new URL(url), f, 30, 30);
+			FileUtils.copyURLToFile(new URL(url), f, 300000, 300000);
 		} catch (IOException e) {
 			System.err.println("Could not download " + url);
 			e.printStackTrace();

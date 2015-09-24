@@ -12,8 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02fb60e2-ea51-4b6a-a5d3-e0c3dea42c87" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceSettings.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceSettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerMan.java" afterPath="$PROJECT_DIR$/src/ServerMan.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/Utils.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/Utils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ServerMan.iws" />
@@ -36,10 +35,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ServerMan.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ServerMan.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ServerMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.46829268">
               <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
@@ -80,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerInstanceSettings.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServerInstanceSettings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79512197">
-              <caret line="116" column="25" selection-start-line="116" selection-start-column="25" selection-end-line="116" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="114" column="33" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
               <folding>
                 <element signature="e#1680#1681#0" expanded="true" />
                 <element signature="e#1709#1710#0" expanded="true" />
@@ -97,7 +96,7 @@
         <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <caret line="36" column="81" selection-start-line="36" selection-start-column="81" selection-end-line="36" selection-end-column="81" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -160,11 +159,11 @@
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/PlayerWrapper.java" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceProcess.java" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/OutputHandler.java" />
-        <option value="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/Utils.java" />
         <option value="$PROJECT_DIR$/data/instances/instances.json" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstance.java" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceSettings.java" />
         <option value="$PROJECT_DIR$/src/ServerMan.java" />
+        <option value="$PROJECT_DIR$/src/net/demus_intergalactical/serverman/Utils.java" />
       </list>
     </option>
   </component>
@@ -612,7 +611,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443124993524</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Load all instances at once">
+      <created>1443126450201</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1443126450201</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -669,7 +674,8 @@
     <MESSAGE value="Added download of match scripts" />
     <MESSAGE value="Small changes to instance loading" />
     <MESSAGE value="Fixed converting list to JSONArray" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed converting list to JSONArray" />
+    <MESSAGE value="Load all instances at once" />
+    <option name="LAST_COMMIT_MESSAGE" value="Load all instances at once" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -680,22 +686,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/instances/vanilla_1.8/match.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceProcess.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1056,16 +1046,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/instances/instances.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1086,22 +1066,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerMan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/instance/ServerInstanceSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79512197">
-          <caret line="116" column="25" selection-start-line="116" selection-start-column="25" selection-end-line="116" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="33" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
           <folding>
             <element signature="e#1680#1681#0" expanded="true" />
             <element signature="e#1709#1710#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/net/URLConnection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327674">
+          <caret line="40" column="20" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/commons-io-2.4.jar!/org/apache/commons/io/FileUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43972835">
+          <caret line="649" column="34" selection-start-line="649" selection-start-column="34" selection-end-line="649" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/serverman/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="81" selection-start-line="36" selection-start-column="81" selection-end-line="36" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerMan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46829268">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
