@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Utils {
@@ -32,13 +33,19 @@ public class Utils {
 		return (JSONObject) jp.parse(new FileReader(filename));
 	}
 
-	public static void download(String url, File f) {
-		try {
-			FileUtils.copyURLToFile(new URL(url), f, 300000, 300000);
-		} catch (IOException e) {
-			System.err.println("Could not download " + url);
-			e.printStackTrace();
+	public static void download(String url, File f) throws IOException {
+		FileUtils.copyURLToFile(new URL(url), f, 300000, 300000);
+	}
+
+	public static String download(String url) throws IOException {
+		File tmp = File.createTempFile("serverman", "tmp");
+		Utils.download(url, tmp);
+		String contents = readFile(tmp.getAbsolutePath());
+		if (!tmp.delete()) {
+			System.err.println("Could not delete temp file "
+				+ tmp.getAbsolutePath());
 		}
+		return contents;
 	}
 
 }

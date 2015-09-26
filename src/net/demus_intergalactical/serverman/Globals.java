@@ -8,22 +8,18 @@ public class Globals {
 
 	private static ServerManConfig serverManConfig;
 	private static ServerInstanceSettings instanceSettings;
+	private static AvailableServers availableServers;
+	private static SupportedVersions supportedVersions;
 
-	public synchronized static void init() {
+	public synchronized static void init() throws IOException {
 		serverManConfig = new ServerManConfig();
-		try {
-			serverManConfig.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
 		instanceSettings = new ServerInstanceSettings();
-		try {
-			instanceSettings.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
+		availableServers = new AvailableServers();
+		supportedVersions = new SupportedVersions();
+		serverManConfig.load();
+		instanceSettings.load();
+		availableServers.load();
+		supportedVersions.load();
 	}
 
 	public synchronized static
@@ -36,13 +32,11 @@ public class Globals {
 		return instanceSettings;
 	}
 
-	public synchronized static
-	void setInstanceSettings(ServerInstanceSettings instanceSettings) {
-		Globals.instanceSettings = instanceSettings;
+	public synchronized static AvailableServers getAvailableServers() {
+		return availableServers;
 	}
 
-	public synchronized static
-	void setServerManConfig(ServerManConfig serverManConfig) {
-		Globals.serverManConfig = serverManConfig;
+	public synchronized static SupportedVersions getSupportedVersions() {
+		return supportedVersions;
 	}
 }

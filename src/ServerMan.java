@@ -3,6 +3,7 @@ import net.demus_intergalactical.serverman.PlayerHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import net.demus_intergalactical.serverman.instance.ServerInstanceProcess;
 
+import javax.script.ScriptException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,31 +12,18 @@ import java.util.List;
 public class ServerMan {
 
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException,
+			InterruptedException, NoSuchMethodException,
+			ScriptException {
 		Globals.init();
-		try {
-			Globals.getServerManConfig().load();
-			Globals.getInstanceSettings().load();
-			List<ServerInstance> i = Globals.getInstanceSettings().getAllInstances();
-			System.out.println(i);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 
 
-		ServerInstance i = new ServerInstance("vanilla_1.8",
-			(type, time, th, infoLvl, arg) -> {
-				System.out.print(time.getClass().toString());
-				System.out.print(' ');
-				System.out.print(th);
-				System.out.print('/');
-				System.out.print(infoLvl);
-				System.out.print(": ");
-				System.out.print(arg.toString());
-				System.out.println();
-			}, null
-		);
+		ServerInstance i = new ServerInstance();
+		i.setServerInstanceID("vanilla_1.8");
+		i.setOut((type, time, thread, infoLvl, arg) -> {
+			System.out.println(arg);
+		});
 		i.setPlayerHandler(new PlayerHandler() {
 			@Override
 			public void onPlayerJoined(String name) {
@@ -53,8 +41,6 @@ public class ServerMan {
 			}
 		});
 
-		i.load();
-		i.save();
 		i.load();
 		i.run();
 

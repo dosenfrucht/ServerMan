@@ -4,6 +4,7 @@ import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.OutputHandler;
 import net.demus_intergalactical.serverman.PlayerHandler;
 import net.demus_intergalactical.serverman.Utils;
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -12,8 +13,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class ServerInstance {
 		setPlayerHandler(playerHandler);
 	}
 
-	public ServerInstance load() {
+	public ServerInstance load() throws NoSuchMethodException,
+			ScriptException, IOException {
 
 		loadConfig();
 
@@ -106,7 +108,8 @@ public class ServerInstance {
 
 
 
-	public void loadMatchScript() {
+	public void loadMatchScript() throws IOException, ScriptException,
+			NoSuchMethodException {
 		PlayerWrapper pw = new PlayerWrapper(this, playerHandler);
 
 		String matchScriptPath = Globals.getServerManConfig()
@@ -115,28 +118,23 @@ public class ServerInstance {
 
 		File matchScriptFile = new File(matchScriptPath);
 		if (!matchScriptFile.exists()) {
-			System.err.println("match.js not found .. attempt to download");
+			System.err.println(
+				"match.js not found .. attempt to download"
+			);
 			File tmp = new File(matchScriptPath);
-			String url = "http://serverman.demus-intergalactical.net/v/" + serverVersion + "/match.js";
+			String url =
+				"http://serverman.demus-intergalactical.net/v/"
+					+ serverVersion + "/match.js";
 			Utils.download(url, tmp);
 		}
 
 		ScriptEngineManager sm = new ScriptEngineManager();
 		this.js = sm.getEngineByName("JavaScript");
 
-		try {
-			js.put("log", out);
-			js.put("players", pw);
-			js.eval(new FileReader(matchScriptFile));
-		} catch (ScriptException | FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			((Invocable) js).invokeFunction("init");
-		} catch (ScriptException | NoSuchMethodException e) {
-			e.printStackTrace();
-		}
+		js.put("log", out);
+		js.put("players", pw);
+		js.eval(new FileReader(matchScriptFile));
+		((Invocable) js).invokeFunction("init");
 	}
 
 
@@ -192,6 +190,10 @@ public class ServerInstance {
 
 
 	public void run() {
+		System.out.println("run()");
+		System.out.println(this.getName());
+		System.out.println(this.getServerFile());
+		System.out.println(this.getJavaArgs());
 		p = new ServerInstanceProcess(this);
 		p.start();
 	}
@@ -205,7 +207,7 @@ public class ServerInstance {
 	}
 
 	public synchronized void stop() {
-		p.stop();
+		send("stop");
 	}
 
 	public synchronized ServerInstanceProcess getProcess() {
@@ -222,5 +224,23 @@ public class ServerInstance {
 
 	public void setServerVersion(String serverVersion) {
 		this.serverVersion = serverVersion;
+	}
+
+	public void setIcon(File icon) throws IOException {
+		String iconPath = Globals.getServerManConfig()
+			.get("instances_home") + File.separator
+			+ serverInstanceID + File.separator + "server-icon.png";
+		FileUtils.copyFile(icon, new File(iconPath));
+	}
+
+	public File getIcon() {
+		String iconPath = Globals.getServerManConfig()
+			.get("instances_home") + File.separator
+			+ serverInstanceID + File.separator + "server-icon.png";
+		File f =  new File(iconPath);
+		if (!f.exists()) {
+			return null;
+		}
+		return f;
 	}
 }

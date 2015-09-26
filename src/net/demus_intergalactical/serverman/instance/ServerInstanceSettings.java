@@ -22,13 +22,15 @@ public class ServerInstanceSettings {
 	private OutputHandler outputHandler;
 
 	public ServerInstanceSettings() {
-		path = Globals.getServerManConfig()
-			.get("instances_home") + File.separator
-			+ "instances.json";
 		conf = new HashMap<>();
 	}
 
 	public ServerInstanceSettings load() throws IOException {
+
+		path = Globals.getServerManConfig()
+			.get("instances_home") + File.separator
+			+ "instances.json";
+
 		File f = new File(path);
 		if (!f.exists()) {
 			f.getParentFile().mkdirs();
