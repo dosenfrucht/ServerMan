@@ -19,24 +19,20 @@ public class ServerManConfig {
 	}
 
 	public synchronized ServerManConfig load()
-			throws IOException {
-		try {
-			File f = new File(path);
-			if (!f.exists()) {
-				f.createNewFile();
-				conf = defaultConfig();
-				save();
-				return this;
-			}
-			JSONObject confJson = Utils.loadJson(path);
-			confJson.keySet().stream()
-				.forEach(key -> {
-					conf.put((String)key, confJson.get(key));
-				});
-		} catch (ParseException e) {
-			System.err.println("Failed to parse JSON: " + path);
+			throws IOException, ParseException {
+
+		File f = new File(path);
+		if (!f.exists()) {
+			f.createNewFile();
 			conf = defaultConfig();
+			save();
+			return this;
 		}
+		JSONObject confJson = Utils.loadJson(path);
+		confJson.keySet().stream()
+			.forEach(key -> {
+				conf.put((String) key, confJson.get(key));
+			});
 		return this;
 	}
 

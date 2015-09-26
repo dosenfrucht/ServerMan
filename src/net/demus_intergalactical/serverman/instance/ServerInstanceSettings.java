@@ -25,7 +25,8 @@ public class ServerInstanceSettings {
 		conf = new HashMap<>();
 	}
 
-	public ServerInstanceSettings load() throws IOException {
+	public ServerInstanceSettings load() throws IOException,
+			ParseException {
 
 		path = Globals.getServerManConfig()
 			.get("instances_home") + File.separator
@@ -40,11 +41,7 @@ public class ServerInstanceSettings {
 			return this;
 		}
 		JSONObject confJson = null;
-		try {
-			confJson = Utils.loadJson(path);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		confJson = Utils.loadJson(path);
 		final JSONObject finalConfJson = confJson;
 		confJson.keySet().stream()
 			.filter(key -> key instanceof String)

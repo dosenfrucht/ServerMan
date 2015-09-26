@@ -190,10 +190,6 @@ public class ServerInstance {
 
 
 	public void run() {
-		System.out.println("run()");
-		System.out.println(this.getName());
-		System.out.println(this.getServerFile());
-		System.out.println(this.getJavaArgs());
 		p = new ServerInstanceProcess(this);
 		p.start();
 	}

@@ -2,6 +2,7 @@ import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.PlayerHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import net.demus_intergalactical.serverman.instance.ServerInstanceProcess;
+import org.json.simple.parser.ParseException;
 
 import javax.script.ScriptException;
 import java.io.BufferedReader;
@@ -13,8 +14,8 @@ public class ServerMan {
 
 
 	public static void main(String[] args) throws IOException,
-			InterruptedException, NoSuchMethodException,
-			ScriptException {
+		InterruptedException, NoSuchMethodException,
+		ScriptException, ParseException {
 		Globals.init();
 
 
