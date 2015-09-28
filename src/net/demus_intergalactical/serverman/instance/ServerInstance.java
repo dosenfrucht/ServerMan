@@ -1,9 +1,6 @@
 package net.demus_intergalactical.serverman.instance;
 
-import net.demus_intergalactical.serverman.Globals;
-import net.demus_intergalactical.serverman.OutputHandler;
-import net.demus_intergalactical.serverman.PlayerHandler;
-import net.demus_intergalactical.serverman.Utils;
+import net.demus_intergalactical.serverman.*;
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -32,17 +29,10 @@ public class ServerInstance {
 
 	private OutputHandler out;
 	private PlayerHandler playerHandler;
+	private StatusHandler statusHandler;
 
 	public ServerInstance() {
 		javaArgs = new LinkedList<>();
-	}
-
-	public ServerInstance(String serverInstanceID, OutputHandler out,
-	                      PlayerHandler playerHandler) {
-		javaArgs = new LinkedList<>();
-		setServerInstanceID(serverInstanceID);
-		setOut(out);
-		setPlayerHandler(playerHandler);
 	}
 
 	public ServerInstance load() throws NoSuchMethodException,
@@ -238,5 +228,13 @@ public class ServerInstance {
 			return null;
 		}
 		return f;
+	}
+
+	public StatusHandler getStatusHandler() {
+		return statusHandler;
+	}
+
+	public void setStatusHandler(StatusHandler statusHandler) {
+		this.statusHandler = statusHandler;
 	}
 }

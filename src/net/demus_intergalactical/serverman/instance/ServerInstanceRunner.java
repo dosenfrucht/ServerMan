@@ -74,6 +74,7 @@ public class ServerInstanceRunner implements Runnable {
 		BufferedWriter out = new BufferedWriter(outB);
 
 		try {
+			instance.getStatusHandler().onStatusStarted();
 			while (running) {
 				if (!commandBuffer.isEmpty()) {
 					out.write(commandBuffer.poll());
@@ -93,6 +94,8 @@ public class ServerInstanceRunner implements Runnable {
 					running = false;
 				}
 			}
+
+			instance.getStatusHandler().onStatusStarted();
 
 			in.close();
 			out.close();

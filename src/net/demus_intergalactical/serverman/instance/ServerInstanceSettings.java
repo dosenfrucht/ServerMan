@@ -105,10 +105,10 @@ public class ServerInstanceSettings {
 		ServerInstance i;
 		JSONObject o;
 		List<String> args;
-		for (Object ko : conf.keySet()) {
+		for (String ko : conf.keySet()) {
 			o = (JSONObject) conf.get(ko);
 			i = new ServerInstance();
-			i.setServerInstanceID((String) ko);
+			i.setServerInstanceID(ko);
 			i.setName((String) o.get("name"));
 			i.setServerFile((String) o.get("server_file"));
 			i.setServerVersion((String) o.get("server_version"));
