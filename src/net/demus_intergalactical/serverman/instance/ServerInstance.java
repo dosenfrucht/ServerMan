@@ -194,6 +194,7 @@ public class ServerInstance {
 
 	public synchronized void stop() {
 		send("stop");
+		p.stop();
 	}
 
 	public synchronized ServerInstanceProcess getProcess() {
