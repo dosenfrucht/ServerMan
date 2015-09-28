@@ -67,7 +67,11 @@ public class ServerMan {
 		boolean running = p.isRunning();
 		while (running) {
 			if (in.ready()) {
-				p.send(in.readLine());
+				String s = in.readLine();
+				if (s.equals("exit")) {
+					i.stop();
+				}
+				p.send(s);
 			}
 			Thread.sleep(1);
 			running = p.isRunning();
