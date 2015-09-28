@@ -79,6 +79,12 @@ public class ServerInstanceSettings {
 		return this;
 	}
 
+	public ServerInstanceSettings remove(String serverInstanceID) {
+		conf.remove(serverInstanceID);
+		saveConfig();
+		return this;
+	}
+
 	public ServerInstanceSettings addDefault(String serverInstanceID) {
 		this.add(serverInstanceID, defaultInstance(serverInstanceID));
 		saveConfig();
