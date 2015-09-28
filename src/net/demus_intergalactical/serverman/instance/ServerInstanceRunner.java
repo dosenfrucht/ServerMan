@@ -95,7 +95,7 @@ public class ServerInstanceRunner implements Runnable {
 				}
 			}
 
-			instance.getStatusHandler().onStatusStarted();
+			instance.getStatusHandler().onStatusStopped();
 
 			in.close();
 			out.close();

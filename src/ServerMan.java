@@ -1,5 +1,6 @@
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.PlayerHandler;
+import net.demus_intergalactical.serverman.StatusHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import net.demus_intergalactical.serverman.instance.ServerInstanceProcess;
 import org.json.simple.parser.ParseException;
@@ -39,6 +40,17 @@ public class ServerMan {
 				System.out.println("Player " + name + " left");
 				System.out.println(i.getProcess().getPlayers()
 					.size());
+			}
+		});
+		i.setStatusHandler(new StatusHandler() {
+			@Override
+			public void onStatusStarted() {
+				System.out.println("Started...");
+			}
+
+			@Override
+			public void onStatusStopped() {
+				System.out.println("Stopped...");
 			}
 		});
 
