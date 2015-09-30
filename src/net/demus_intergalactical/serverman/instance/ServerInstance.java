@@ -185,7 +185,7 @@ public class ServerInstance {
 	}
 
 	public synchronized boolean isRunning() {
-		return p.isRunning();
+		return p != null && p.isRunning();
 	}
 
 	public synchronized void send(String command) {

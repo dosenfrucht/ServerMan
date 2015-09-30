@@ -54,6 +54,8 @@ public class ServerManConfig {
 		map.put("app_home", System.getProperty("user.dir"));
 		map.put("instances_home", System.getProperty("user.dir")
 			+ File.separator + "instances");
+		map.put("versions_home", System.getProperty("user.dir")
+			+ File.separator + "versions");
 		return map;
 	}
 
