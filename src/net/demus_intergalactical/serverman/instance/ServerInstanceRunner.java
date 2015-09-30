@@ -54,7 +54,7 @@ public class ServerInstanceRunner implements Runnable {
 		pb.command(com);
 
 
-		pb.redirectErrorStream(false);
+		pb.redirectErrorStream(true);
 		Process p;
 		try {
 			p = pb.start();

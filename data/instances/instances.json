@@ -1,2 +1,14 @@
-{"vanilla_1.8":{"name":"vanilla_1.8","server_file":"minecraft_server.1.8.8.jar",
-  "server_version":"unknown","java_args":[]}}
+{
+  "vanilla_1.8": {
+    "name":"vanilla_1.8",
+    "server_file":"minecraft_server.1.8.8.jar",
+    "server_version":"unknown",
+    "java_args":[]
+  },
+  "1.6.4": {
+    "name":"1.6.4",
+    "server_file":"minecraft_server.1.6.4.jar",
+    "server_version": "unknown",
+    "java_args": []
+  }
+}

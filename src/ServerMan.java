@@ -22,7 +22,7 @@ public class ServerMan {
 
 
 		ServerInstance i = new ServerInstance();
-		i.setServerInstanceID("vanilla_1.8");
+		i.setServerInstanceID("1.6.4");
 		i.setOut((type, time, thread, infoLvl, arg) -> {
 			System.out.println(arg);
 		});
