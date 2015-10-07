@@ -4,18 +4,28 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ServerManConfig {
 
 	private final String path;
+	private final String basePath;
 	private volatile Map<String, Object> conf;
 
 	public ServerManConfig() {
 		conf = new HashMap<>();
-		path = System.getProperty("user.dir") + File.separator
-			+ "config.json";
+		File basePathFile = new File(getClass().getProtectionDomain()
+			.getCodeSource()
+			.getLocation().getPath());
+		if (basePathFile.isDirectory()) {
+			basePath = basePathFile.getPath() + File.separator;
+		} else {
+			basePath = basePathFile.getParentFile().getPath() +
+				File.separator;
+		}
+		path = basePath + "config.json";
 	}
 
 	public synchronized ServerManConfig load()
@@ -30,9 +40,7 @@ public class ServerManConfig {
 		}
 		JSONObject confJson = Utils.loadJson(path);
 		confJson.keySet().stream()
-			.forEach(key -> {
-				conf.put((String) key, confJson.get(key));
-			});
+			.forEach(key -> conf.put((String) key, confJson.get(key)));
 		return this;
 	}
 
@@ -51,11 +59,9 @@ public class ServerManConfig {
 
 	private Map<String, Object> defaultConfig() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("app_home", System.getProperty("user.dir"));
-		map.put("instances_home", System.getProperty("user.dir")
-			+ File.separator + "instances");
-		map.put("versions_home", System.getProperty("user.dir")
-			+ File.separator + "versions");
+		map.put("app_home", basePath);
+		map.put("instances_home", basePath + "instances");
+		map.put("versions_home", basePath + "versions");
 		return map;
 	}
 

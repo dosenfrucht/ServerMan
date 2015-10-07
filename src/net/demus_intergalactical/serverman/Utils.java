@@ -14,15 +14,7 @@ public class Utils {
 
 	public static String readFile(String filename)
 			throws IOException {
-		FileReader in = new FileReader(filename);
-		StringBuilder contents = new StringBuilder();
-		char[] buffer = new char[4096];
-		int read = 0;
-		do {
-			contents.append(buffer, 0, read);
-			read = in.read(buffer);
-		} while (read >= 0);
-		return contents.toString();
+		return FileUtils.readFileToString(new File(filename));
 	}
 
 	public static JSONObject loadJson(String filename)
