@@ -45,23 +45,24 @@ public class Completion {
 	}
 
 	private Set<String> replaceSpecials(Set<String> completion) {
+		Set<String> tmp = new HashSet<>();
 		for (String key : completion) {
 			switch (key) {
 			case "§player":
-				completion.remove(key);
-				completion.addAll(p.getPlayers());
+				tmp.addAll(p.getPlayers());
 				break;
 			case "§number":
-				completion.remove(key);
-				completion.add("number");
+				tmp.add("number");
 				break;
-			case "$name":
-				completion.remove(key);
-				completion.add("text");
+			case "§name":
+				tmp.add("text");
+				break;
+			default:
+				tmp.add(key);
 				break;
 			}
 		}
-		return completion;
+		return tmp;
 	}
 
 	private Set<String> complete(JSONObject completion, List<String> path,

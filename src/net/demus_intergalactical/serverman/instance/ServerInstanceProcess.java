@@ -13,11 +13,11 @@ public class ServerInstanceProcess {
 
 	public ServerInstanceProcess(ServerInstance inst) {
 		runner = new ServerInstanceRunner(inst);
+		rT = new Thread(runner);
 		players = new HashSet<>();
 	}
 
 	public void start() {
-		rT = new Thread(runner);
 		rT.start();
 	}
 

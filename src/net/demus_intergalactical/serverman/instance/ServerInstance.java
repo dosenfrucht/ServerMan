@@ -32,6 +32,7 @@ public class ServerInstance {
 	private PlayerHandler playerHandler;
 	private StatusHandler statusHandler;
 	private Completion completion;
+	private boolean loaded;
 
 	public ServerInstance() {
 		javaArgs = new LinkedList<>();
@@ -46,6 +47,8 @@ public class ServerInstance {
 		loadMatchScript();
 
 		loadCompletion();
+
+		loaded = true;
 
 		return this;
 	}
@@ -272,5 +275,9 @@ public class ServerInstance {
 
 	public Set<String> complete(String s) {
 		return completion.complete(s);
+	}
+
+	public boolean isLoaded() {
+		return loaded;
 	}
 }
