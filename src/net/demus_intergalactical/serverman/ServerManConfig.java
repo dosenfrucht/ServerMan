@@ -4,7 +4,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,15 +18,28 @@ public class ServerManConfig {
 
 	public ServerManConfig() {
 		conf = new HashMap<>();
-		File basePathFile = new File(getClass().getProtectionDomain()
-			.getCodeSource()
-			.getLocation().getPath());
+		URL currentPathURL = getClass().getProtectionDomain()
+				.getCodeSource()
+				.getLocation();
+
+		java.net.URI basePathURI = null;
+		try {
+			basePathURI = currentPathURL.toURI();
+		} catch (URISyntaxException e) {
+			//if this happens, java is bad
+			e.printStackTrace();
+		}
+
+		//System.out.println("currentPathURL: " + currentPathURL);
+		//System.out.println("getPath: " + basePathURI.getPath());
+		File basePathFile = new File(basePathURI.getPath());
 		if (basePathFile.isDirectory()) {
 			basePath = basePathFile.getPath() + File.separator;
 		} else {
 			basePath = basePathFile.getParentFile().getPath() +
 				File.separator;
 		}
+
 		path = basePath + "config.json";
 	}
 
