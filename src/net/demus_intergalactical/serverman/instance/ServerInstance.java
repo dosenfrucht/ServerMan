@@ -4,6 +4,7 @@ import net.demus_intergalactical.serverman.*;
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -12,8 +13,8 @@ import javax.script.ScriptException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class ServerInstance {
 
@@ -30,9 +31,11 @@ public class ServerInstance {
 	private OutputHandler out;
 	private PlayerHandler playerHandler;
 	private StatusHandler statusHandler;
+	private Completion completion;
 
 	public ServerInstance() {
 		javaArgs = new LinkedList<>();
+		p = new ServerInstanceProcess(this);
 	}
 
 	public ServerInstance load() throws NoSuchMethodException,
@@ -41,6 +44,8 @@ public class ServerInstance {
 		loadConfig();
 
 		loadMatchScript();
+
+		loadCompletion();
 
 		return this;
 	}
@@ -127,6 +132,30 @@ public class ServerInstance {
 		((Invocable) js).invokeFunction("init");
 	}
 
+	private void loadCompletion() throws IOException {
+		String completionFilePath = Globals.getServerManConfig()
+			.get("instances_home") + File.separator
+			+ serverInstanceID + File.separator + "completion.json";
+		File completionFile = new File(completionFilePath);
+		if (!completionFile.exists()) {
+			try {
+				String url = "http://serverman" +
+					".demus-intergalactical.net/v/"
+					+ serverVersion + "/completion.json";
+				Utils.download(url, completionFile);
+			} catch (IOException e) {
+				completionFile.createNewFile();
+			}
+		}
+		JSONObject completionObj;
+		try {
+			completionObj = Utils.loadJson(completionFilePath);
+		} catch (ParseException e) {
+			completionObj = new JSONObject();
+		}
+		completion = new Completion(completionObj, p);
+	}
+
 
 	public String getName() {
 		return name;
@@ -180,7 +209,6 @@ public class ServerInstance {
 
 
 	public void run() {
-		p = new ServerInstanceProcess(this);
 		p.start();
 	}
 
@@ -236,5 +264,13 @@ public class ServerInstance {
 
 	public void setStatusHandler(StatusHandler statusHandler) {
 		this.statusHandler = statusHandler;
+	}
+
+	public JSONObject getCompletion() {
+		return completion.getCompletion();
+	}
+
+	public Set<String> complete(String s) {
+		return completion.complete(s);
 	}
 }

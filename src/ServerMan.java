@@ -22,7 +22,7 @@ public class ServerMan {
 
 
 		ServerInstance i = new ServerInstance();
-		i.setServerInstanceID("1.6.4");
+		i.setServerInstanceID("1.8.8");
 		i.setOut((type, time, thread, infoLvl, arg) -> {
 			System.out.println(arg);
 		});
@@ -55,6 +55,8 @@ public class ServerMan {
 		});
 
 		i.load();
+		System.out.println(i.complete("tp "));
+
 		i.run();
 
 
@@ -68,6 +70,7 @@ public class ServerMan {
 		while (running) {
 			if (in.ready()) {
 				String s = in.readLine();
+				System.out.println(i.complete(s));
 				if (s.equals("exit")) {
 					i.stop();
 				}
