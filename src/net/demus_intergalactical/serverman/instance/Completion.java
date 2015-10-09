@@ -52,10 +52,7 @@ public class Completion {
 				tmp.addAll(p.getPlayers());
 				break;
 			case "§number":
-				tmp.add("number");
-				break;
 			case "§name":
-				tmp.add("text");
 				break;
 			default:
 				tmp.add(key);
