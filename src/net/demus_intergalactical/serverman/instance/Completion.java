@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by thomas on 8.10.2015.
- */
 public class Completion {
 
 	private JSONObject completion;
@@ -21,6 +18,9 @@ public class Completion {
 	}
 
 	public Set<String> complete(String s) {
+		if (s.startsWith("/")) {
+			s = s.substring(1);
+		}
 		String[] rawStrings = s.split(" ");
 		List<String> strings = new ArrayList<>();
 		for (String rawString : rawStrings) {

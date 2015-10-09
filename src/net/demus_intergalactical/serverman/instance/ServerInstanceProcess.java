@@ -9,15 +9,21 @@ public class ServerInstanceProcess {
 
 	private volatile ServerInstanceRunner runner;
 
+	private ServerInstance instance;
+
 	private HashSet<String> players;
 
 	public ServerInstanceProcess(ServerInstance inst) {
-		runner = new ServerInstanceRunner(inst);
+		instance = inst;
+		runner = new ServerInstanceRunner(instance);
 		rT = new Thread(runner);
 		players = new HashSet<>();
 	}
 
 	public void start() {
+		runner = new ServerInstanceRunner(instance);
+		rT = new Thread(runner);
+		players = new HashSet<>();
 		rT.start();
 	}
 
