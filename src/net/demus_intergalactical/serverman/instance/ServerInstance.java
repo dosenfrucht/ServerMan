@@ -54,7 +54,6 @@ public class ServerInstance {
 	}
 
 	public ServerInstance save() {
-
 		JSONArray a = new JSONArray();
 		a.addAll(javaArgs);
 
@@ -93,6 +92,7 @@ public class ServerInstance {
 			Globals.getInstanceSettings().get(serverInstanceID);
 		}
 
+		javaArgs = new JSONArray();
 		Object[] tmpArgs;
 
 		name = (String) obj.get("name");
@@ -117,7 +117,7 @@ public class ServerInstance {
 		File matchScriptFile = new File(matchScriptPath);
 		if (!matchScriptFile.exists()) {
 			System.err.println(
-				"match.js not found .. attempt to download"
+					"match.js not found .. attempt to download"
 			);
 			File tmp = new File(matchScriptPath);
 			String url =
