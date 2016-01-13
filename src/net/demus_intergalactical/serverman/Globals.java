@@ -10,18 +10,15 @@ public class Globals {
 	private static ServerManConfig serverManConfig;
 	private static ServerInstanceSettings instanceSettings;
 	private static AvailableServers availableServers;
-	private static SupportedVersions supportedVersions;
 
 	public synchronized static void init()
 			throws IOException, ParseException {
 		serverManConfig = new ServerManConfig();
 		instanceSettings = new ServerInstanceSettings();
 		availableServers = new AvailableServers();
-		supportedVersions = new SupportedVersions();
 		serverManConfig.load();
 		instanceSettings.load();
 		availableServers.load();
-		supportedVersions.load();
 	}
 
 	public synchronized static
@@ -38,7 +35,4 @@ public class Globals {
 		return availableServers;
 	}
 
-	public synchronized static SupportedVersions getSupportedVersions() {
-		return supportedVersions;
-	}
 }

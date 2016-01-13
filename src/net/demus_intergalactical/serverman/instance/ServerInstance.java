@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class ServerInstance {
 
@@ -115,16 +114,6 @@ public class ServerInstance {
 			+ serverInstanceID + File.separator + "match.js";
 
 		File matchScriptFile = new File(matchScriptPath);
-		if (!matchScriptFile.exists()) {
-			System.err.println(
-					"match.js not found .. attempt to download"
-			);
-			File tmp = new File(matchScriptPath);
-			String url =
-				"http://serverman.demus-intergalactical.net/v/"
-					+ serverVersion + "/match.js";
-			Utils.download(url, tmp);
-		}
 
 		ScriptEngineManager sm = new ScriptEngineManager();
 		this.js = sm.getEngineByName("JavaScript");
